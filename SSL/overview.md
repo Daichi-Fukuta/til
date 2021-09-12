@@ -11,12 +11,17 @@
 # 流れ
 ```mermaid
 sequenceDiagram
-  クライアント->>サーバー: アクセス
-  サーバー->>クライアント: サーバー証明書を送信(公開鍵入っている)
-  クライアント->>認証局: この証明書本物？
-  認証局->>クライアント: 本物！
-  note over クライアント: 証明書から公開鍵を取得
-  note over クライアント: 共通鍵を生成
-  note over クライアント: 共通鍵を公開鍵によって暗号化
-  クライアント->>サーバー: 暗号化した共通鍵を送信
-  note over サーバー: 秘密鍵によって復号
+
+  participant cl as クライアント
+  participant sv as サーバー
+  participant ca as 認証局
+
+  cl->>sv: アクセス
+  sv->>cl: サーバー証明書を送信(公開鍵入っている)
+  cl->>ca: この証明書本物？
+  ca->>cl: 本物！
+  note over cl: 証明書から公開鍵を取得
+  note over cl: 共通鍵を生成
+  note over cl: 共通鍵を公開鍵によって暗号化
+  cl->>sv: 暗号化した共通鍵を送信
+  note over sv: 秘密鍵によって復号
